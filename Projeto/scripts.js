@@ -1,23 +1,31 @@
 // <a class="link" href="/conta">Criar uma conta</a>
-const linkCriarUmaConta = document.createElement("a");
-linkCriarUmaConta.className = "link" //objeto.propriedadeDoObjeto
-linkCriarUmaConta.href = "/conta" 
-linkCriarUmaConta.appendChild(document.createTextNode("Criar uma conta"));
+
+const linkCriarUmaConta = React.createElement("a", {
+    className: "link", 
+    href: "/conta", 
+    children: "Criar uma conta"
+});
 
 //  <a class="link" href="/conta">Fazer login</a>
-const linkFazerLogin = document.createElement("a");
-linkFazerLogin.className = "link"
-linkFazerLogin.href = "/login" 
-linkFazerLogin.appendChild(document.createTextNode("Fazer login"));
+
+const linkFazerLogin = React.createElement("a", {
+    className: "link", 
+    href:"/login", 
+    children: "Fazer login"
+});
 
 //div onde serão posicionadas as "children"
-const divisaoProjeto = document.getElementById("projeto");
 
-const formularioLogin = document.createElement("form");
-formularioLogin.appendChild(linkCriarUmaConta);
-formularioLogin.appendChild(linkFazerLogin);
+const formularioLogin = React.createElement("form",{
+    children: [linkCriarUmaConta, linkFazerLogin]
+});
 
-divisaoProjeto.appendChild(formularioLogin);
+const divisaoProjeto = document.getElementById("projeto"); // essa div faz parte da DOM REAL
+
+//ReactDOM.render(elemento React, elemento do DOM real)
+ReactDOM.render(formularioLogin, divisaoProjeto) // fala qual é o elemento react que voce quer colocar no dom real
+
+
 
 
 
