@@ -3,21 +3,25 @@ import Link from "../../componentes/Link/Link";
 import Botao from "../../componentes/Botao/Botao";
 import Legenda from "../../componentes/Legenda/Legenda";
 import Campo from "../../componentes/Campo/Campo";
-import "./Login.css";
+import "./Conta.css";
 
-function Login(){
+function Conta(){
     return (
-        <main className="login">
-            <h1>Login</h1>
-            <p>Entre com seu e-mail e senha.</p>
+        <main className="conta">
+            <h1>Conta</h1>
+            <p>Preencha o formulário para criar uma conta!</p>
+            <Legenda htmlFor="text">Nome completo:</Legenda>
+            <Campo type="text" id="text" placeholder="Nome completo"/>
+            <Legenda htmlFor="telefone">Telefone:</Legenda>
+            <Campo type="tel" id="telefone" placeholder="Telefone"/>
             <Legenda htmlFor="email">Email:</Legenda>
             <Campo type="email" id="email" placeholder="Email"/>
             <Legenda htmlFor="senha">Senha:</Legenda>
             <Campo type="password" id="senha" placeholder="Senha"/>
             <Botao>Enviar</Botao>
-            <Link url="">Criar uma conta</Link>
+            <Link url="">Fazer login</Link>
         </main>
     );
 };
 
-export default Login;
+export default Conta;
