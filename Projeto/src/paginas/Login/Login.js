@@ -14,7 +14,7 @@ function Login(){
             <Campo type="email" id="email" placeholder="Email"/>
             <Legenda htmlFor="senha">Senha:</Legenda>
             <Campo type="password" id="senha" placeholder="Senha"/>
-            <Botao>Enviar</Botao>
+            <Botao desabilitado>Enviar</Botao>
             <Link url="">Criar uma conta</Link>
         </main>
     );
