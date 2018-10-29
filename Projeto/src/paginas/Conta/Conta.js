@@ -11,13 +11,13 @@ function Conta(){
             <h1>Conta</h1>
             <p>Preencha o formulário para criar uma conta!</p>
             <Legenda htmlFor="text">Nome completo:</Legenda>
-            <Campo type="text" id="text" placeholder="Nome completo" obrigatorio/>
+            <Campo type="text" id="text" placeholder="Nome completo" required/>
             <Legenda htmlFor="telefone">Telefone:</Legenda>
-            <Campo type="tel" id="telefone" placeholder="Telefone"/>
+            <Campo type="tel" id="telefone" placeholder="Telefone" required/>
             <Legenda htmlFor="email">Email:</Legenda>
-            <Campo type="email" id="email" placeholder="Email"/>
+            <Campo type="email" id="email" placeholder="Email" required/>
             <Legenda htmlFor="senha">Senha:</Legenda>
-            <Campo type="password" id="senha" placeholder="Senha"/>
+            <Campo type="password" id="senha" placeholder="Senha" required/>
             <Botao desabilitado>Enviar</Botao>
             <Link url="">Fazer login</Link>
         </main>
