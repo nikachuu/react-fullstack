@@ -16,7 +16,7 @@ class Campo extends Component {
     constructor(props){
         super(props);
         this.state = {
-            modificado: false, 
+            modificado: false,
             erro: ""
         };
         // this.valida = this.valida.bind(this) quando a função valida for chamada, se ela usa a palavra this dentro dela, o this sempre será a classe Campo

@@ -8,12 +8,12 @@ import "./Login.css";
 /*
 1) O componente pode mudar de estado? Sim // Class
 2) Qual o estado inicial? state = { desabilitado: true } // constructor
-3) O que muda? setState({ erro: '' }) ou  // setState({erro: 'Campo obrigatório'})
+3) O que muda? setState({ desabilitado: false })
 4) O que faz ele mudar?
-// function onChange pra verificar se devo ou não mostrar uma mensagem de erro
-if condição mostra erro
-- Email: obrigatorio, pelo menos 10 carateres
-- Senha: obrigatorio, pelo menos 6 caracteres
+// function onChange e a Referência criada para utilizar a função temErro() presente no componente Campo
+if campoEmail tem erro ou campoSenha tem erro
+- botão desabilita
+- se não, botão habilitado
 */
 
 class Login extends Component {
@@ -21,7 +21,7 @@ class Login extends Component {
     constructor(props){
         super(props); // passa o props pra classe de cima
         this.emailRef = React.createRef();
-        this.senhaRef = React.createRef(); 
+        this.senhaRef = React.createRef();
         this.state = {
             desabilitado: true
         };
