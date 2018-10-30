@@ -7,7 +7,7 @@ function Botao(props) {
         classes += " botao--desabilitado";
     };
     return (
-    <input className={classes} type="submit" value={props.children} />
+    <input className={classes} type="submit" value={props.children} disabled={props.desabilitado}/>
     );
 };
 
