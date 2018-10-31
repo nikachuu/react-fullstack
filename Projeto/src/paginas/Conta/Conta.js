@@ -5,7 +5,6 @@ import Legenda from "../../componentes/Legenda/Legenda";
 import Campo from "../../componentes/Campo/Campo";
 import "./Conta.css";
 
-
 /*
 1) O componente pode mudar de estado? Sim // Class
 2) Qual o estado inicial? state = { desabilitado: true } // constructor
@@ -22,7 +21,7 @@ se não:
 
 class Conta extends Component {
     constructor(props){
-        super(props);
+        super(props); // esse super(props) chama o constructor do Component, este que por sua vez possui seu proprio props
         this.nomeRef = React.createRef();
         this.telRef = React.createRef();
         this.mailRef = React.createRef();

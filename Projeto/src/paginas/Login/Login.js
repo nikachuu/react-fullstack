@@ -16,11 +16,11 @@ if campoEmail tem erro ou campoSenha tem erro
 - se não, botão habilitado
 */
 
-class Login extends Component {
+class Login extends Component { 
 
-    constructor(props){
+    constructor(props){ // constructor consiste dos dados necessários para construir o objeto
         super(props); // passa o props pra classe de cima
-        this.emailRef = React.createRef();
+        this.emailRef = React.createRef(); // a referencia cria um objeto { current: null }
         this.senhaRef = React.createRef();
         this.state = {
             desabilitado: true
@@ -32,14 +32,12 @@ class Login extends Component {
         const campoEmail = this.emailRef.current; //pegando a referencia atual do email e da senha, sendo possivel chamar todas as funções disponiveis naquele campo, ou seja, a temERro()
         const campoSenha = this.senhaRef.current;
 
-        console.log("campoEmail", campoEmail)
-
         if ( campoEmail.temErro() || campoSenha.temErro() ) {
-            this.setState({ desabilitado : true })
+            this.setState({ desabilitado : true });
         } else {
-            this.setState({ desabilitado: false })
-        }
-    }
+            this.setState({ desabilitado: false });
+        };
+    };
 
     render() {
         return (

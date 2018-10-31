@@ -22,10 +22,10 @@ class Campo extends Component {
         // this.valida = this.valida.bind(this) quando a função valida for chamada, se ela usa a palavra this dentro dela, o this sempre será a classe Campo
     };
 
-    temErro() {
+    temErro = () => {
         return !this.state.modificado || this.state.erro ? true : false //se tem erro dentro do state retorna true, se não tiver retorna false
-        // é o mesmo que if ( this.state.erro ) { return true } else { return false }
-    }
+        // é o mesmo que if ( this.state.erro )' { return true } else { return false }
+    };
 
     valida = (evento) => {
         const input = evento.target;
@@ -50,7 +50,7 @@ class Campo extends Component {
         // this.props.onChange()
     };
 
-    render() {
+    render() { // chamar render do component: super.render()
         return (
             <div>
                 <input 
@@ -65,9 +65,9 @@ class Campo extends Component {
 
                 <p className="grupo__erro">{this.state.erro}</p>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 /*
 <input name ="email" type="email" id="email" placeholder="Email">
 ;
