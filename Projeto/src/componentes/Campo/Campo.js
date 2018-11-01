@@ -15,11 +15,17 @@ if condição mostra erro
 class Campo extends Component {
     constructor(props){
         super(props);
+        this.valor = "";
         this.state = {
             modificado: false,
             erro: ""
         };
         // this.valida = this.valida.bind(this) quando a função valida for chamada, se ela usa a palavra this dentro dela, o this sempre será a classe Campo
+    };
+
+    // função responsavel por retornar os valores inseridos no campo  (que inicia com valor vazio)
+    getValor = () => {
+        return this.valor;
     };
 
     temErro = () => {
@@ -47,7 +53,8 @@ class Campo extends Component {
         };
 
         this.setState({ modificado: true, erro: mensagem }, this.props.onChange) // para não ter delay na atualização do onChange
-        // this.props.onChange()
+        
+        this.valor = value; // guardando o value na classe para poder usar depois na tela de login
     };
 
     render() { // chamar render do component: super.render()

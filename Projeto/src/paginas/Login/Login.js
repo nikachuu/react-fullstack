@@ -39,34 +39,52 @@ class Login extends Component {
         };
     };
 
+    enviarDados = (e) => {
+        e.preventDefault();
+
+        //através da referencia que foi feita anteriormente, é possível armazenar as informações que foram inseridas nos campos especificas chamando o current e a função que retorna o valor
+        const dados = {
+            email: this.emailRef.current.getValor(),
+            senha: this.senhaRef.current.getValor()
+        };
+
+        this.props.onEnviar(dados); 
+        // formularios disparam evento onsubmit quando o botão é clicado. este, chamará a função enviarDados.
+        // o enviarDados é um atributo que foi inserido no objeto props da tag Login (ou seja, é um atributo dela) e os dados serão enviados para ela através da função
+
+        this.props.historico.push("/");
+    };
+
     render() {
         return (
             <main className="login">
                 <h1>Login</h1>
                 <p>Entre com seu e-mail e senha.</p>
-                <Legenda htmlFor="email">Email:</Legenda>
-                <Campo
-                    ref={this.emailRef}
-                    type="email"
-                    id="email"
-                    placeholder="Email"
-                    required
-                    onChange={this.handleChangeButton}
-                />
+                <form onSubmit={this.enviarDados}>
+                    <Legenda htmlFor="email">Email:</Legenda>
+                    <Campo
+                        ref={this.emailRef}
+                        type="email"
+                        id="email"
+                        placeholder="Email"
+                        required
+                        onChange={this.handleChangeButton}
+                    />
 
-                <Legenda htmlFor="senha">Senha:</Legenda>
-                <Campo
-                    ref={this.senhaRef}
-                    type="password"
-                    id="senha"
-                    placeholder="Senha"
-                    required
-                    minLength={6}
-                    onChange={this.handleChangeButton}
-                />
+                    <Legenda htmlFor="senha">Senha:</Legenda>
+                    <Campo
+                        ref={this.senhaRef}
+                        type="password"
+                        id="senha"
+                        placeholder="Senha"
+                        required
+                        minLength={6}
+                        onChange={this.handleChangeButton}
+                    />
 
-                <Botao desabilitado={this.state.desabilitado}>Enviar</Botao>
-                <Link url="">Criar uma conta</Link>
+                    <Botao desabilitado={this.state.desabilitado}>Enviar</Botao>
+                    <Link url="">Criar uma conta</Link>
+                </form>
             </main>
         );
     };
