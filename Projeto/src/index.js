@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"; // componente browser router irá "abraçar toda a aplicação"
+import Navbar from "./componentes/Navbar/Navbar";
 import Login from "./paginas/Login/Login";
 import Conta from "./paginas/Conta/Conta";
 import QuemSomos from "./paginas/QuemSomos/QuemSomos";
@@ -22,6 +23,10 @@ function logaUsuario(dados) {
   usuario = dados;
 };
 
+function deslogaUsuario() {
+  localStorage.removeItem("usuario");
+  usuario = null;
+};
 // componente com todas as páginas presentes na aplicação
 // se não tem o exact, todo e qualquer path que tiver / vai sempre mostrar a tela de Login!! não esquecer!!
 // render do router faz a verificação de login, ele espera receber dentro das chaves uma função de verificação
@@ -34,7 +39,8 @@ function logaUsuario(dados) {
 function App() { 
   return (
     <div className="app">
-      {/*NavBar*/}
+      <Navbar usuario={usuario} deslogaUsuario={deslogaUsuario}/>
+      
       <Switch>
         <Route path="/" exact render={() => {
           return usuario ? <Home/> : <Redirect to="/Login"/>
