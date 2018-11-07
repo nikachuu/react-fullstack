@@ -41,23 +41,19 @@ import "./index.css";
 // props como parametro em login torna possivel receber o histórico do navegador e acesssar informações que foram inseridas
 // historico (props.history) armazena um array com as paginas disponiveis; o push adiciona mais uma url no historico e redireciona para a pagina que for especificada na função
 
-function App(props) { 
+function App(props) {
 
   const usuario = props.usuario;
-  const deslogaUsuario = props.deslogaUsuario;
-  const logaUsuario = props.logaUsuario;
 
   return (
     <div className="app">
-      <Navbar usuario={usuario} deslogaUsuario={deslogaUsuario}/>
-      
+      <Navbar/>
+
       <Switch>
         <Route path="/" exact render={() => {
           return usuario ? <Home/> : <Redirect to="/Login"/>
-        }}/> 
-        <Route path="/login" render={(props) => { 
-          return <Login historico={props.history} onEnviar={logaUsuario} />
         }}/>
+        <Route path="/login" component={Login}/>
         <Route path="/conta" component={Conta}/>
         <Route path="/quem-somos" component={QuemSomos}/>
         <Route path="/contato" component={Contato}/>
@@ -81,9 +77,9 @@ function passaDadosDoEstadoParaMeuComponente(state){
 };
 
 function passamFuncoesQueDisparamAcoesViaProps(dispatch){
-  const props = { 
+  const props = {
     logaUsuario: (dados) => {
-      const acao = { 
+      const acao = {
         type: "LOGA_USUARIO",
         dados: dados
       };
@@ -98,12 +94,12 @@ function passamFuncoesQueDisparamAcoesViaProps(dispatch){
       dispatch(acao);
     }
   };
-  
+
   return props;
 };
 
 const conectaNaStore = connect(
-  passaDadosDoEstadoParaMeuComponente, 
+  passaDadosDoEstadoParaMeuComponente,
   passamFuncoesQueDisparamAcoesViaProps
 );
 
@@ -114,6 +110,6 @@ ReactDOM.render(
     <BrowserRouter>
       <AppConectada/>
     </BrowserRouter>
-  </Provider>, 
+  </Provider>,
   document.getElementById("projeto")
   );

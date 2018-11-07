@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Link from "../../componentes/Link/Link";
 import Botao from "../../componentes/Botao/Botao";
 import Legenda from "../../componentes/Legenda/Legenda";
@@ -16,7 +17,7 @@ if campoEmail tem erro ou campoSenha tem erro
 - se não, botão habilitado
 */
 
-class Login extends Component { 
+class Login extends Component {
 
     constructor(props){ // constructor consiste dos dados necessários para construir o objeto
         super(props); // passa o props pra classe de cima
@@ -48,11 +49,11 @@ class Login extends Component {
             senha: this.senhaRef.current.getValor()
         };
 
-        this.props.onEnviar(dados); 
+        this.props.logaUsuario(dados); // aqui mudou para logaUsuario pois a props que dispara a acao tem uma funcao com esse nome no index.js
         // formularios disparam evento onsubmit quando o botão é clicado. este, chamará a função enviarDados.
         // o enviarDados é um atributo que foi inserido no objeto props da tag Login (ou seja, é um atributo dela) e os dados serão enviados para ela através da função
 
-        this.props.historico.push("/");
+        this.props.history.push("/");
     };
 
     render() {
@@ -90,4 +91,21 @@ class Login extends Component {
     };
 };
 
-export default Login;
+function passaAcoesNoProps(dispatch) {
+    return {
+        logaUsuario: (dados) => {
+            const acao = {
+                type: "LOGA_USUARIO",
+                dados: dados
+            }
+
+            dispatch(acao);
+        }
+    };
+};
+
+const conectaNaStore = connect(null, passaAcoesNoProps);
+
+const LoginConectado = conectaNaStore(Login);
+
+export default LoginConectado;

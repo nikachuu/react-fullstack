@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import logo from "./logo.png";
 import Menu from "../Menu/Menu";
 import "./Navbar.css";
@@ -21,4 +22,30 @@ function Navbar(props) {
         </header>
     );
 };
-export default Navbar;
+
+function passaNoPropsDadosDoEstado(state) {
+    return {
+        usuario: state.usuario
+    };
+};
+
+function passaNoPropsDisparadoresDeAcao(dispatch) {
+    return {
+        deslogaUsuario: () => {
+            const acao = {
+                type: "DESLOGA_USUARIO"
+            }
+
+            dispatch(acao);
+        }
+    };
+};
+
+const conectaNaStore = connect(
+    passaNoPropsDadosDoEstado,
+    passaNoPropsDisparadoresDeAcao
+);
+
+const NavbarConectado = conectaNaStore(Navbar);
+
+export default NavbarConectado;

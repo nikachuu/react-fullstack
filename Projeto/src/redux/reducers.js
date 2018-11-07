@@ -9,8 +9,8 @@ const usuarioInicial = null;
 
 function usuario( state = usuarioInicial, action ) { // state nesse caso seria o usuario atual
     switch(action.type) {
-        case "LOGA_USUARIO": 
-            const usuarioLogado = action.dados; 
+        case "LOGA_USUARIO":
+            const usuarioLogado = action.dados;
             return usuarioLogado; // retorna os dados para a Store quando a ação acontecer
         case "DESLOGA_USUARIO":
             const usuarioDeslogado = null;
