@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { deslogaUsuario } from "../../redux/actions";
 import logo from "./logo.png";
 import Menu from "../Menu/Menu";
 import "./Navbar.css";
@@ -23,29 +24,10 @@ function Navbar(props) {
     );
 };
 
-function passaNoPropsDadosDoEstado(state) {
-    return {
-        usuario: state.usuario
-    };
-};
-
-function passaNoPropsDisparadoresDeAcao(dispatch) {
-    return {
-        deslogaUsuario: () => {
-            const acao = {
-                type: "DESLOGA_USUARIO"
-            }
-
-            dispatch(acao);
-        }
-    };
-};
-
-const conectaNaStore = connect(
-    passaNoPropsDadosDoEstado,
-    passaNoPropsDisparadoresDeAcao
+// na documentação, consta que o connect recebe como parâmetro ou uma função ou um objeto, por isso o deslogaUsuario esta dentro de um objeto
+export default withRouter(
+    connect(
+        (state) => ({ usuario: state.usuario }), 
+        { deslogaUsuario }
+        )(Navbar)
 );
-
-const NavbarConectado = conectaNaStore(Navbar);
-
-export default withRouter(NavbarConectado);
