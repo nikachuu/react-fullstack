@@ -29,10 +29,12 @@ function usuario( state = usuarioInicial, action ) { // state nesse caso seria o
     };
 };
 
-function postits( postitsAtuais = [], action ){
+function postits( state = [], action ){
     switch(action.type) {
+        case "CADASTRA_POSTIT":
+            return state.concat(action.dados) // forma um novo array junto ao anterior sem alterar o array antigo
         default:
-            return postitsAtuais
+            return state;
     }
 };
 

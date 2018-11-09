@@ -93,3 +93,10 @@ class Login extends Component {
 };
 
 export default connect(null, { logaUsuario })(Login);
+
+
+//<Login logaUsuario={logaUsuario} />
+
+// const props = {
+//     logaUsuario: logaUsuario
+// }

@@ -25,6 +25,16 @@ render() {
       ) : ( 
         <div>
           <Postit />
+
+          <div>
+            {this.props.postits.map(postit => (
+              <Postit 
+                key={postit.id}
+                id={postit.id}
+                titulo={postit.titulo} 
+                texto={postit.texto}/>
+            ))}
+          </div>
         </div>
         )}      
     </main>
@@ -32,4 +42,7 @@ render() {
 };
 }
 
-export default connect((state) => ({ usuario: state.usuario }))(Home);
+export default connect((state) => ({ usuario: state.usuario, postits: state.postits }))(Home);
+
+//this.props.postits: é uma array de objetos, para renderizar na tela precisa ser criada um array de tags dentro do render (MAP)
+// <Home usuario={state.usuario} postits={state.postits} />
