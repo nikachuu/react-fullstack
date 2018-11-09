@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { cadastraPostit } from "../../redux/actions";
+import { cadastraPostit, alteraPostit, removePostit } from "../../redux/actions";
 import "./Postit.css";
 
 class Postit extends Component {
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = { editando: false };
     };
 
     cadastraOuAlteraPostit = (evento) => {
@@ -16,29 +16,54 @@ class Postit extends Component {
        
         const form = evento.target;
 
-        const dados = {
-            id: `716df87d-9e91-4592-8e77-fca48df03b31${Math.random(100)}`,
-            titulo: form.titulo.value,
-            texto: form.texto.value
-        };
+        const cadastrando = !this.props.id; 
 
-        this.props.cadastraPostit(dados); // criar função no actions do redux 
-        //precisa de um redutor esperando a ação para colocar o postit dentro da lista
-        form.reset(); // limpa todos os campos depois que dispara a ação!
-        
-    }
+        if ( cadastrando ) {
+            const dados = {
+                id: `716df87d-9e91-4592-8e77-fca48df03b31${Math.random(100)}`,
+                titulo: form.titulo.value,
+                texto: form.texto.value
+            };
+
+            this.props.cadastraPostit(dados); // criar função no actions do redux 
+            //precisa de um redutor esperando a ação para colocar o postit dentro da lista
+            form.reset(); // limpa todos os campos depois que dispara a ação!
+
+        } else {
+            const dados = {
+                id: this.props.id,
+                titulo: form.titulo.value,
+                texto: form.texto.value
+            }
+
+            this.props.alteraPostit(dados);
+            this.setState({ editando: false });
+        };
+    };
+
+    editaPostit = () => {
+        this.setState({ editando: true });
+    };
+
+    removePostit = (evento) => {
+        evento.stopPropagation();
+        const id = this.props.id
+        this.props.removePostit(id);
+    };
 
     render(){
         const cadastrando = !this.props.id;
 
         return (
-            <form className="postit" onSubmit={this.cadastraOuAlteraPostit}>
+            <form className="postit" onSubmit={this.cadastraOuAlteraPostit} onClick={this.editaPostit}>
+                { !cadastrando && this.state.editando && (
                 <input 
                     className="postit__botao-remover" 
                     type="submit" 
                     value="Remover"
+                    onClick={this.removePostit}
                 />
-
+                )}
                 <input 
                     className="postit__titulo"
                     name="titulo"
@@ -56,12 +81,13 @@ class Postit extends Component {
                     autoComplete="off"
                     defaultValue={this.props.texto}
                 />
-
+                {(cadastrando || this.state.editando) && (
                 <input 
                     className="postit__botao-concluir"
                     type="submit" 
                     value="Concluido"
                 />
+                )}
             </form>
         )
     };
@@ -70,11 +96,13 @@ class Postit extends Component {
 
 export default connect(
     null,
-    { cadastraPostit }
+    { cadastraPostit, alteraPostit, removePostit }
 )(Postit);
 
 // const props = {
-//     cadastraPostit: cadastraPostit
+//     cadastraPostit: cadastraPostit,
+//      alteraPostit: alteraPostit,
+//      removePostit: removePostit
 // }
 
 // <Postit cadastraPostit={cadastraPostit} />

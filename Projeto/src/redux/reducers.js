@@ -32,7 +32,11 @@ function usuario( state = usuarioInicial, action ) { // state nesse caso seria o
 function postits( state = [], action ){
     switch(action.type) {
         case "CADASTRA_POSTIT":
-            return state.concat(action.dados) // forma um novo array junto ao anterior sem alterar o array antigo
+            return state.concat(action.dados); // forma um novo array junto ao anterior sem alterar o array antigo
+        case "ALTERA_POSTIT":
+            return state.map(postit => postit.id === action.dados.id ? action.dados : postit); 
+        case "REMOVE_POSTIT":
+            return state.filter(postit => postit.id !== action.id)
         default:
             return state;
     }
